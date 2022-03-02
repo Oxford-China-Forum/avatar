@@ -11,6 +11,8 @@ AVATAR_OVERLAY_IMAGE = Path('assets/overlay.png')
 
 TICKET_OUTPUT_DIR = OUTPUT_DIR / 'tickets/'
 TICKET_BASE_IMAGE = Path('assets/ticket.png')
+TICKET_ID_DIGITS = 7
 
+# Create necessary directories
 AVATAR_OUTPUT_DIR.mkdir(exist_ok=True, parents=True)
 TICKET_OUTPUT_DIR.mkdir(exist_ok=True, parents=True)

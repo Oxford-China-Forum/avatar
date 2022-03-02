@@ -8,7 +8,7 @@ from flask import request, render_template, jsonify, redirect, url_for
 from ocf import db
 from ocf.utils import superimpose_images, generate_ticket
 from ocf.models import Ticket
-from ocf.constants import AVATAR_ALLOWED_FORMATS, AVATAR_OVERLAY_IMAGE
+from ocf.constants import AVATAR_ALLOWED_FORMATS, AVATAR_OVERLAY_IMAGE, TICKET_ID_DIGITS
 
 
 @app.route('/', methods=['GET'])
@@ -18,7 +18,7 @@ def index_page():
 
 @app.route('/avatar', methods=['GET'])
 def avatar_page():
-    return 'hi'
+    return render_template('avatar.html')
 
 
 @app.route('/avatar', methods=['POST'])
@@ -46,7 +46,7 @@ def avatar_process():
 
 @app.route('/ticket', methods=['GET'])
 def ticket_page():
-    return 'hi'
+    return render_template('ticket.html')
 
 
 @app.route('/ticket', methods=['POST'])
@@ -58,10 +58,13 @@ def ticket_generate():
     ticket = Ticket(name=name)
     db.session.add(ticket)
     db.session.commit()
-    ticket_id = '#' + str(ticket.id).zfill(7)
-    ticket_filename = generate_ticket(name, ticket_id)
-    return json_resp({'name': ticket_filename})
-    
+    try:
+        ticket_id = f'#{ticket.id:0{TICKET_ID_DIGITS}d}'
+        ticket_filename = generate_ticket(name, ticket_id)
+        return json_resp({'name': ticket_filename})
+    except Exception as e:
+        return json_resp(code=-2, message=f'出现错误：{str(e)}')
+
 
 def get_file_extension(filename):
     if '.' not in filename:

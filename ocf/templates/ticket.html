@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"> -->
+{% endblock %}
+{% block scripts %}
+  <script src="/static/scripts/ticket.js"></script>
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class="container" id="main-container">
+
+    <h1 class="mb-5">预约参加 2022 牛津中国论坛</h1>
+
+    <form id="ticket-form">
+      <div class="mb-3">
+        <label for="nameInput" class="form-label">您的姓名</label>
+        <input type="text" class="form-control" id="nameInput" name="name">
+      </div>
+      <button type="submit" class="btn btn-danger">提交预约</button>
+      <p id="status-info"></p>
+    </form>
+
+  </div>
+{% endblock %}

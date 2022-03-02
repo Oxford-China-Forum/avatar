@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"> -->
+{% endblock %}
+{% block scripts %}
+  <script src="/static/scripts/avatar.js"></script>
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="container" id="main-container">
+
+  <h1 class="mb-5">生成 2022 牛津中国论坛专属头像</h1>
+
+  <form id="avatar-form">
+    <div class="mb-3">
+      <label for="avatarInput" class="form-label">上传你的头像</label>
+      <input type="file" class="form-control" id="avatarInput" name="avatar">
+    </div>
+    <button type="submit" class="btn btn-danger">生成头像</button>
+    <p id="status-info"></p>
+  </form>
+
+</div>
+{% endblock %}
