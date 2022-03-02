@@ -30,7 +30,7 @@ def avatar_process():
     if avatar_file is None or avatar_file.filename == '':
         return json_resp(code=-1, message='缺失文件')
     avatar_extension = get_file_extension(avatar_file.filename)
-    if avatar_extension[1:] not in AVATAR_ALLOWED_FORMATS:
+    if avatar_extension.lstrip('.') not in AVATAR_ALLOWED_FORMATS:
         return json_resp(code=-1, message='文件格式不支持')
     avatar_filename = str(uuid.uuid1()) + avatar_extension
     avatar_filepath = os.path.join(app.config['UPLOAD_DIR'], avatar_filename)

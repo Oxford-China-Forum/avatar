@@ -4,7 +4,6 @@ import secrets
 import logging
 
 from flask import Flask
-# from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
 from flask_cors import CORS
@@ -23,7 +22,7 @@ def create_app():
     # Configure app environment, defaults to development
     flask_env = os.getenv('FLASK_ENV', 'development')
     app.config.from_object(app_config.get(flask_env))
-    app.config.from_pyfile('secrets.py', silent=True)
+    # app.config.from_pyfile('secrets.py', silent=True)
     app.secret_key = secrets.token_hex(16)
 
     # Setup logging
