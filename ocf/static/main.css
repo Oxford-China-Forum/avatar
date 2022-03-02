@@ -1,0 +1,34 @@
+html, body{
+    margin:0;
+}
+
+#page-container {
+    height: 100vh;
+    /* min-height: 100vh; */
+}
+
+#page-left-container {
+    /* background: lightgray; */
+    padding: 50px 30px;
+    width: calc(100vw - 680px);
+}
+
+#page-right-container {
+    width: 680px;
+}
+
+#preview-form {
+    margin-top: calc(50vh - 400px);
+}
+
+.step-number-container {
+    width: 100px;
+    max-width: 100px;
+}
+
+.step-number {
+    margin-top: -48px;
+    font-size: 96pt;
+    font-weight: bold;
+    text-align: right;
+}
