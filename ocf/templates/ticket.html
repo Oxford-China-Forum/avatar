@@ -13,18 +13,26 @@
 
 {% block content %}
   <div class="container" id="main-container">
+    
+    <div class="row text-center content-div">
+      <a class="text-secondary text-decoration-none" href="/">&lang; 返回</a>
+      <h1 class="">生成 OCF 2022 预约票</h1>
+    </div>
 
-    <a class="text-secondary text-decoration-none" href="/">&lang; 返回</a>
-    <h1 class="mb-5">预约参加 2022 牛津中国论坛</h1>
-
-    <form id="ticket-form">
-      <div class="mb-3">
-        <label for="nameInput" class="form-label">您的姓名</label>
-        <input type="text" class="form-control" id="nameInput" name="name">
+    <div class="row justify-content-center" id="body-container">
+      <div class="col-1 col-lg-4"></div>
+      <div class="col-10 col-lg-4">
+        <form id="ticket-form">
+          <div class="mb-4">
+            <label for="nameInput" class="form-label">您的姓名</label>
+            <input type="text" class="form-control" id="nameInput" name="name">
+          </div>
+          <button type="submit" class="btn btn-outline-primary">生成</button>
+          <p id="status-info"></p>
+        </form>
       </div>
-      <button type="submit" class="btn btn-danger">提交预约</button>
-      <p id="status-info"></p>
-    </form>
+      <div class="col-1 col-lg-4"></div>
+    </div>
 
   </div>
 {% endblock %}

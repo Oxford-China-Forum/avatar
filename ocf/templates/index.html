@@ -12,12 +12,25 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container" id="main-container">
+  <div class="container text-center" id="main-container">
 
-    <h1 class="mb-5">2022 牛津中国论坛的一些好玩东西</h1>
+    <div id="hero-container" class="row justify-content-center">
+      <img src="/static/images/hero.png" class="">
+    </div>
+    
+    <div class="row">
+      <h1>2022 牛津中国论坛 • <span class="primary-color">跨界无界</span></h1>
+      <h2 class="mb-5">Transcending Boundaries</h2>
+    </div>
 
-    <a class="btn btn-outline-danger" href="/avatar">生成 OCF 2022 专属头像</a>
-    <a class="btn btn-outline-danger" href="/ticket">预约参加 OCF 2022</a>
+    <div class="row text-center">
+      <p>
+        <a class="btn btn-outline-primary" href="/avatar">生成 OCF 2022 专属头像</a>
+      </p>
+      <p>
+        <a class="btn btn-outline-primary" href="/ticket">生成 OCF 2022 预约票</a>
+      </p>
+    </div>
 
   </div>
 {% endblock %}

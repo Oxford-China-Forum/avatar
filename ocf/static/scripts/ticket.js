@@ -28,7 +28,7 @@ document.getElementById('ticket-form').addEventListener('submit', e => {
 
         fileName = json.data.name;
 
-        const parentContainer = document.getElementById('main-container');
+        const parentContainer = document.getElementById('body-container');
         const img = document.createElement('img');
         img.setAttribute('src', `/static/tickets/${fileName}`);
         // parentContainer.innerHTML = '';
