@@ -1,10 +1,11 @@
-from tkinter.tix import IMAGE
 import uuid
+import random
+import textwrap
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from ocf.constants import AVATAR_OUTPUT_MAX_SIZE, AVATAR_OUTPUT_DIR, TICKET_BASE_IMAGE, TICKET_OUTPUT_DIR, IMAGE_OUTPUT_QUALITY
+from ocf.constants import AVATAR_OUTPUT_MAX_SIZE, AVATAR_OUTPUT_DIR, TICKET_BASE_IMAGE, TICKET_OUTPUT_DIR, IMAGE_OUTPUT_QUALITY, TICKET_MAJORS, TICKET_COLLEGES, TICKET_OCCUPATION, TICKET_LOCATIONS, TICKET_TOPICS, TICKET_TEXT
 
 
 def superimpose_images(base_path: str, overlay_path: str) -> Path:
@@ -34,6 +35,36 @@ def superimpose_images(base_path: str, overlay_path: str) -> Path:
 
 
 def generate_ticket(name, ticket_id):
+    major = random.choice(TICKET_MAJORS)
+    college = random.choice(TICKET_COLLEGES)
+    occupation = random.choice(TICKET_OCCUPATION)
+    location = random.choice(TICKET_LOCATIONS)
+    topic = random.choice(TICKET_TOPICS)
+    random_text = TICKET_TEXT.format(major=major, occupation=occupation, location=location, topic=topic, **college)
+    
+    ticket_im = Image.open(TICKET_BASE_IMAGE.as_posix())
+    body_font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWD.TTF', size=32)
+    title_font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWB.TTF', size=58)
+    draw = ImageDraw.Draw(im=ticket_im)
+
+    margin = 50
+    offset = 539
+    width = 2800
+    # for line in textwrap.wrap(random_text, width=width):
+    #     draw.text((margin, offset), text=line, font=body_font, fill='black')
+    #     offset += body_font.getsize(line)[1] * 1.4
+    draw.multiline_text((margin, offset), text=random_text, font=body_font, fill='black', spacing=12)
+    
+    draw.text((50, 416), text=name, font=title_font, fill='black')
+    draw.text((500, 416), text=ticket_id, font=title_font, fill='black')
+    
+    filename = f'{uuid.uuid1()}.jpg'
+    ticket_im.save((TICKET_OUTPUT_DIR / filename).as_posix(), 'jpeg', quality=IMAGE_OUTPUT_QUALITY, progressive=True)
+
+    return filename
+
+
+def generate_ticket_old(name, ticket_id):
     ticket_im = Image.open(TICKET_BASE_IMAGE.as_posix())
     font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWB.TTF', size=58)
     draw = ImageDraw.Draw(im=ticket_im)
