@@ -56,7 +56,7 @@ def generate_ticket(name, ticket_id):
     y_offset = 896
     width = 690
     line_height = body_font.getsize('H')[1] * 1.35
-    avoid_head_chars = ('。', '，', '”')
+    avoid_head_chars = ('。', '，', '”', ' ')
     
     curr_len = 0
     for snippet in TICKET_TEXT:
@@ -65,9 +65,12 @@ def generate_ticket(name, ticket_id):
             char_len = body_font.getlength(char)
             if char == '\n' or (curr_len + char_len > width and char not in avoid_head_chars):
                 # Simulate line break
-                x_offset = margin
-                y_offset += line_height
-                curr_len = 0
+                if x_offset == margin: # double line break
+                    y_offset += line_height * 0.6
+                else:
+                    x_offset = margin
+                    y_offset += line_height
+                    curr_len = 0
             if char != '\n':
                 # Draw single character
                 draw.text((x_offset, y_offset), text=char, font=body_font, fill=snippet['color'])
