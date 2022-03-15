@@ -57,6 +57,7 @@ TICKET_COLLEGES = [
     {'chinese': '大学书院', 'english': 'University College', 'year': 1249},
     {'chinese': '瓦德汉书院', 'english': 'Wadham College', 'year': 1610},
     {'chinese': '沃弗森书院', 'english': 'Wolfson College', 'year': 1966},
+    {'chinese': '摄政公园学院', 'english': 'Regent\'s Park College', 'year': 1810},
 ]
 TICKET_OCCUPATION = ['本科生', '硕士生', '博士生', '副教授', '正教授']
 TICKET_LOCATIONS = ['考试院', '圣母玛利亚大学教堂', '拉德克利夫天文角', '谢尔登剧院', '大学公园', '植物园', '米尔城堡', '科学区', '高街', '阿什莫林艺术与考古博物馆', '皮特河博物馆', '叹息桥']

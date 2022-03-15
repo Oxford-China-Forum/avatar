@@ -65,7 +65,7 @@ def generate_ticket(name, ticket_id):
             char_len = body_font.getlength(char)
             if char == '\n' or (curr_len + char_len > width and char not in avoid_head_chars):
                 # Simulate line break
-                if x_offset == margin: # double line break
+                if x_offset == margin: # slightly shrink double line break
                     y_offset += line_height * 0.6
                 else:
                     x_offset = margin
