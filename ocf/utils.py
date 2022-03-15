@@ -40,6 +40,53 @@ def generate_ticket(name, ticket_id):
     occupation = random.choice(TICKET_OCCUPATION)
     location = random.choice(TICKET_LOCATIONS)
     topic = random.choice(TICKET_TOPICS)
+    
+    ticket_im = Image.open(TICKET_BASE_IMAGE.as_posix())
+    body_font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWD.TTF', size=28)
+    title_font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWB.TTF', size=52)
+    draw = ImageDraw.Draw(im=ticket_im)
+
+    # Draw ticket ID and name
+    draw.text((80, 780), text=ticket_id, font=title_font, fill='black')
+    draw.text((390, 780), text=name, font=title_font, fill='black')
+
+    # Draw body text
+    margin = 80
+    x_offset = margin
+    y_offset = 896
+    width = 690
+    line_height = body_font.getsize('H')[1] * 1.35
+    avoid_head_chars = ('。', '，', '”')
+    
+    curr_len = 0
+    for snippet in TICKET_TEXT:
+        line = snippet['text'].format(major=major, occupation=occupation, location=location, topic=topic, **college)
+        for char in line:
+            char_len = body_font.getlength(char)
+            if char == '\n' or (curr_len + char_len > width and char not in avoid_head_chars):
+                # Simulate line break
+                x_offset = margin
+                y_offset += line_height
+                curr_len = 0
+            if char != '\n':
+                # Draw single character
+                draw.text((x_offset, y_offset), text=char, font=body_font, fill=snippet['color'])
+                x_offset += char_len
+                curr_len += char_len
+
+    # Save the image
+    filename = f'{uuid.uuid1()}.jpg'
+    ticket_im.save((TICKET_OUTPUT_DIR / filename).as_posix(), 'jpeg', quality=IMAGE_OUTPUT_QUALITY, progressive=True)
+
+    return filename
+
+
+def generate_ticket_old(name, ticket_id):
+    major = random.choice(TICKET_MAJORS)
+    college = random.choice(TICKET_COLLEGES)
+    occupation = random.choice(TICKET_OCCUPATION)
+    location = random.choice(TICKET_LOCATIONS)
+    topic = random.choice(TICKET_TOPICS)
     random_text = TICKET_TEXT.format(major=major, occupation=occupation, location=location, topic=topic, **college)
     
     ticket_im = Image.open(TICKET_BASE_IMAGE.as_posix())
@@ -64,7 +111,7 @@ def generate_ticket(name, ticket_id):
     return filename
 
 
-def generate_ticket_old(name, ticket_id):
+def generate_ticket_old_old(name, ticket_id):
     ticket_im = Image.open(TICKET_BASE_IMAGE.as_posix())
     font = ImageFont.truetype(font='assets/FZFWZhuZiAYuanJWB.TTF', size=58)
     draw = ImageDraw.Draw(im=ticket_im)
