@@ -66,7 +66,12 @@ def ticket_generate():
         return json_resp(code=-2, message=f'出现错误：{str(e)}')
 
 
-@app.route('/portal', defaults={'filepath': 'index.html'})
+@app.route('/portal')
+def portal_redirect(filepath):
+    return redirect('portal/')
+
+
+@app.route('/portal/', defaults={'filepath': 'index.html'})
 @app.route('/portal/<path:filepath>')
 def portal_page(filepath):
     if filepath is None:
