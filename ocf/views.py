@@ -67,7 +67,7 @@ def ticket_generate():
 
 
 @app.route('/portal')
-def portal_redirect(filepath):
+def portal_redirect():
     return redirect('portal/')
 
 
