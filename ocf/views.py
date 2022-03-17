@@ -3,7 +3,7 @@ import uuid
 import time
 
 from flask import current_app as app
-from flask import request, render_template, jsonify, redirect, url_for
+from flask import request, render_template, send_from_directory, send_file, jsonify, redirect, url_for
 
 from ocf import db
 from ocf.utils import superimpose_images, generate_ticket
@@ -64,6 +64,14 @@ def ticket_generate():
         return json_resp({'name': ticket_filename})
     except Exception as e:
         return json_resp(code=-2, message=f'出现错误：{str(e)}')
+
+
+@app.route('/portal', defaults={'filepath': 'index.html'})
+@app.route('/portal/<path:filepath>')
+def portal_page(filepath):
+    if filepath is None:
+        filepath = 'index.html'
+    return send_from_directory('static/portal', filepath)
 
 
 def get_file_extension(filename):
