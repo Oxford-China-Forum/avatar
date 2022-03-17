@@ -35,6 +35,7 @@ def superimpose_images(base_path: str, overlay_path: str) -> Path:
 
 
 def generate_ticket(name, ticket_id):
+    random.seed(hash(name))
     major = random.choice(TICKET_MAJORS)
     college = random.choice(TICKET_COLLEGES)
     occupation = random.choice(TICKET_OCCUPATION)
